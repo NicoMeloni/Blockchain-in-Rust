@@ -1,14 +1,10 @@
-mod balances; //mod é usar para importar]
-mod system;
-use balances::Pallet;
+use blockchainlib::*;
 
 
 
 fn main() {
-    let mut pallet_ex: Pallet = Pallet::new();
-    pallet_ex.set_balance(&"nicolas".to_string(), 4);
+    let block = Block::new(0, 0, vec![0; 32], 0, "Genesis Block".to_owned());
 
-    let balance = pallet_ex.balance(&"nicolas".to_string());
+    println!("{:?}", &block)
 
-    println!("Balance: {}", balance);
 }
