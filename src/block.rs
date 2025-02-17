@@ -1,7 +1,7 @@
 
 use super::*;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Block{
     pub index: u32,
     pub timestamp: u128,
@@ -28,16 +28,16 @@ impl Block {
         }
     }
 
-    pub fn mine(&mut self) {
-        for nonce_num in 0..(u64::MAX){
-            self.nonce = nonce_num;
-            let hash = self.hash();
-            if is_difficulty_greater(&hash, self.difficulty) {
-                self.hash = hash;
-                return;
-            }
-        }
-    } 
+    // pub fn mine(&mut self, address: Address, total_reward: u64) {
+    //     for nonce_num in 0..(u64::MAX){
+    //         self.nonce = nonce_num;
+    //         let hash = self.hash();
+    //         if is_difficulty_greater(&hash, self.difficulty) {
+    //             self.hash = hash;
+    //             return;
+    //         }
+    //     }
+    // } 
 
     
 }
@@ -60,7 +60,5 @@ impl Hashable for Block { //adiciona todas as características do bloco dentro d
     }
 }
 
-pub fn is_difficulty_greater(hash: &Vec<u8>, difficulty: u128) -> bool {
-    difficulty > difficulty_bytes_as_u128(&hash).unwrap_or(0)
-}
+
 
